@@ -6,7 +6,7 @@ authors = ["Giovanni Barillari <gi0baro@d4net.org>"]
 license = "BSD-3-Clause"
 edition = "2018"
 
-keywords = ["emmett", "cryptography]
+keywords = ["emmett", "cryptography"]
 
 readme = "README.md"
 homepage = "https://emmett.sh"
