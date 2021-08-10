@@ -1,4 +1,4 @@
-from .emmett_crypto import crypto as _crypto
-
-_ciphers = _crypto.ciphers
-_kdf = _crypto.kdf
+from .emmett_crypto import (
+    ciphers as _ciphers,
+    kdf as _kdf
+)
