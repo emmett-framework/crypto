@@ -62,41 +62,6 @@ jobs:
         name: wheels
         path: target/wheels
 
-  linux-musl:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        target:
-        - x86_64-unknown-linux-musl
-        python-version:
-        - 3.7
-        - 3.8
-        - 3.9
-
-    container:
-      image: python:${{ matrix.python-version }}-alpine
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: deps
-      run: |
-        apk add --no-cache build-base curl
-        curl -sSL https://github.com/PyO3/maturin/releases/download/v${{ env.MATURIN_VERSION }}/maturin-${{ matrix.target }}.tar.gz | tar xz && mv maturin /usr/bin
-    - uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-        target: ${{ matrix.target }}
-        profile: minimal
-        default: true
-    - name: Build
-      run: |
-        maturin build --release --strip --no-sdist --compatibility musllinux_1_2 --target ${{ matrix.target }}
-    - name: Upload wheels
-      uses: actions/upload-artifact@v2
-      with:
-        name: wheels
-        path: target/wheels
-
   macos:
     runs-on: macos-latest
     strategy:
@@ -152,7 +117,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: [ sdist, linux-gnu, linux-musl, macos, windows ]
+    needs: [ sdist, linux-gnu, macos, windows ]
     steps:
       - uses: actions/download-artifact@v2
         with:
