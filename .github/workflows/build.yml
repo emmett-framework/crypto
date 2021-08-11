@@ -6,6 +6,29 @@ env:
   MATURIN_VERSION: 0.11.2
 
 jobs:
+  sdist:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - uses: messense/maturin-action@v1
+      with:
+        maturin-version: v${{ env.MATURIN_VERSION }}
+        command: build
+        args: --release --strip --interpreter python${{ matrix.python-config.version }}
+        target: x64
+        manylinux: off
+        container: off
+    - name: Upload sdist
+      uses: actions/upload-artifact@v2
+      with:
+        name: wheels
+        path: target/wheels/*.tar.gz
+
   linux-gnu:
     runs-on: ubuntu-latest
     strategy:
