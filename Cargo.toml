@@ -1,7 +1,7 @@
 [package]
 name = "emmett-crypto"
 version = "0.1.0"
-description = "Emmett framework crypto library"
+description = "Emmett framework cryptographic library"
 authors = ["Giovanni Barillari <gi0baro@d4net.org>"]
 license = "BSD-3-Clause"
 edition = "2018"
