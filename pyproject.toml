@@ -12,4 +12,4 @@ sdist-include = [
     "emmett_crypto/*.py",
     "tests/*.py"
 ]
-strip = "on"
+strip = true
