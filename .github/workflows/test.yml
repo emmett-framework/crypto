@@ -9,14 +9,14 @@ on:
   pull_request:
 
 env:
-  MATURIN_VERSION: 0.11.2
+  MATURIN_VERSION: 0.11.4
 
 jobs:
   linux:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: [3.7, 3.8, 3.9, '3.10']
 
     steps:
     - uses: actions/checkout@v2
@@ -39,7 +39,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: [3.7, 3.8, 3.9, '3.10']
 
     steps:
     - uses: actions/checkout@v2
@@ -62,7 +62,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: [3.7, 3.8, 3.9, '3.10']
 
     steps:
     - uses: actions/checkout@v2

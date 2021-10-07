@@ -3,7 +3,7 @@ name: build
 on: workflow_dispatch
 
 env:
-  MATURIN_VERSION: 0.11.2
+  MATURIN_VERSION: 0.11.4
 
 jobs:
   sdist:
@@ -36,7 +36,8 @@ jobs:
         python-config: [
           {version: 3.7, lib: cp37-cp37m},
           {version: 3.8, lib: cp38-cp38},
-          {version: 3.9, lib: cp39-cp39}
+          {version: 3.9, lib: cp39-cp39},
+          {version: '3.10', lib: cp310-cp310}
         ]
         target:
           - x86_64
@@ -70,6 +71,7 @@ jobs:
         - 3.7
         - 3.8
         - 3.9
+        - '3.10'
 
     container:
       image: python:${{ matrix.python-version }}-alpine
@@ -88,7 +90,7 @@ jobs:
         default: true
     - name: Build
       run: |
-        maturin build --release --strip --no-sdist --compatibility musllinux_1_2 --target ${{ matrix.target }}
+        maturin build --release --strip --no-sdist --compatibility musllinux_1_1 --target ${{ matrix.target }}
     - name: Upload wheels
       uses: actions/upload-artifact@v2
       with:
@@ -99,7 +101,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: [3.7, 3.8, 3.9, '3.10']
 
     steps:
     - uses: actions/checkout@v2
@@ -128,7 +130,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: [3.7, 3.8, 3.9, '3.10']
 
     steps:
     - uses: actions/checkout@v2

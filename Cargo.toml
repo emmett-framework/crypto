@@ -28,7 +28,7 @@ crate-type = ["cdylib"]
 aes = { version = "0.7" }
 cfb8 = { version = "0.7" }
 cfb-mode = { version = "0.7" }
-ctr = { version = "0.7" }
+ctr = { version = "0.8" }
 pyo3 = { version = "0.14", features = ["extension-module"]}
 ring = { version = "0.16" }
 
@@ -46,6 +46,7 @@ classifiers = [
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python",
     "Programming Language :: Rust",
