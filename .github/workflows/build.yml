@@ -90,7 +90,7 @@ jobs:
         default: true
     - name: Build
       run: |
-        maturin build --release --strip --no-sdist --compatibility musllinux_1_2 --target ${{ matrix.target }}
+        maturin build --release --strip --no-sdist --compatibility musllinux_1_1 --target ${{ matrix.target }}
     - name: Upload wheels
       uses: actions/upload-artifact@v2
       with:
