@@ -250,7 +250,7 @@ dependencies = [
 [[package]]
 name = "pyo3"
 version = "0.14.5"
-source = "git+https://github.com/PyO3/pyo3?rev=4ea03a3159401a91de7042726f2451317c955316#4ea03a3159401a91de7042726f2451317c955316"
+source = "git+https://github.com/gi0baro/pyo3?rev=7e319746d8395a71c841372c9b3a2e8cfa92dec0#7e319746d8395a71c841372c9b3a2e8cfa92dec0"
 dependencies = [
  "cfg-if",
  "indoc",
@@ -265,7 +265,7 @@ dependencies = [
 [[package]]
 name = "pyo3-build-config"
 version = "0.14.5"
-source = "git+https://github.com/PyO3/pyo3?rev=4ea03a3159401a91de7042726f2451317c955316#4ea03a3159401a91de7042726f2451317c955316"
+source = "git+https://github.com/gi0baro/pyo3?rev=7e319746d8395a71c841372c9b3a2e8cfa92dec0#7e319746d8395a71c841372c9b3a2e8cfa92dec0"
 dependencies = [
  "once_cell",
 ]
@@ -273,7 +273,7 @@ dependencies = [
 [[package]]
 name = "pyo3-macros"
 version = "0.14.5"
-source = "git+https://github.com/PyO3/pyo3?rev=4ea03a3159401a91de7042726f2451317c955316#4ea03a3159401a91de7042726f2451317c955316"
+source = "git+https://github.com/gi0baro/pyo3?rev=7e319746d8395a71c841372c9b3a2e8cfa92dec0#7e319746d8395a71c841372c9b3a2e8cfa92dec0"
 dependencies = [
  "pyo3-macros-backend",
  "quote",
@@ -283,7 +283,7 @@ dependencies = [
 [[package]]
 name = "pyo3-macros-backend"
 version = "0.14.5"
-source = "git+https://github.com/PyO3/pyo3?rev=4ea03a3159401a91de7042726f2451317c955316#4ea03a3159401a91de7042726f2451317c955316"
+source = "git+https://github.com/gi0baro/pyo3?rev=7e319746d8395a71c841372c9b3a2e8cfa92dec0#7e319746d8395a71c841372c9b3a2e8cfa92dec0"
 dependencies = [
  "proc-macro2",
  "pyo3-build-config",
