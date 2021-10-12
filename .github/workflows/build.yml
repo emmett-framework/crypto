@@ -36,12 +36,16 @@ jobs:
         python-config:
           - version: 3.7
             lib: cp37-cp37m
+            syscfgdata: _sysconfigdata_m_
           - version: 3.8
             lib: cp38-cp38
+            syscfgdata: _sysconfigdata__
           - version: 3.9
             lib: cp39-cp39
+            syscfgdata: _sysconfigdata__
           - version: '3.10'
             lib: cp310-cp310
+            syscfgdata: _sysconfigdata__
         target:
           - arch: x86_64
             container: quay.io/pypa/manylinux2010_x86_64:latest
@@ -54,6 +58,7 @@ jobs:
       env:
         PYO3_CROSS_PYTHON_VERSION: '${{ matrix.python-config.version }}'
         PYO3_CROSS_LIB_DIR: /opt/python/${{ matrix.python-config.lib }}/lib
+        _PYTHON_SYSCONFIGDATA_NAME: ${{ matrix.python-config.syscfgdata }}linux_${{ matrix.target.arch }}-linux-gnu
       with:
         maturin-version: v${{ env.MATURIN_VERSION }}
         command: build
