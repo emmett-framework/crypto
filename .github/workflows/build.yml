@@ -3,7 +3,7 @@ name: build
 on: workflow_dispatch
 
 env:
-  MATURIN_VERSION: 0.11.4
+  MATURIN_VERSION: 0.11.5
 
 jobs:
   sdist:
@@ -81,7 +81,7 @@ jobs:
 
     container:
       # image: python:${{ matrix.python-version }}-alpine
-      image: cr.amira.io/gi0baro/maturin-builds/musl/${{ matrix.python-version }}:ec2f2080
+      image: cr.amira.io/gi0baro/maturin-builds/musl/${{ matrix.python-version }}:38acee49
 
     steps:
     - uses: actions/checkout@v2

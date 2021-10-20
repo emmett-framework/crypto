@@ -1,6 +1,6 @@
 [package]
 name = "emmett-crypto"
-version = "0.2.0"
+version = "0.2.1"
 description = "Emmett framework cryptographic library"
 authors = ["Giovanni Barillari <gi0baro@d4net.org>"]
 license = "BSD-3-Clause"
@@ -29,7 +29,7 @@ aes = { version = "0.7" }
 cfb8 = { version = "0.7" }
 cfb-mode = { version = "0.7" }
 ctr = { version = "0.8" }
-pyo3 = { git = "https://github.com/gi0baro/pyo3", rev = "7e319746d8395a71c841372c9b3a2e8cfa92dec0", version = "0.14", features = ["extension-module"]}
+pyo3 = { git = "https://github.com/pyo3/pyo3", rev = "465e8372ed706001ae579a042468eb11c389f1a2", version = "0.14", features = ["extension-module"] }
 ring = { version = "0.16" }
 
 [package.metadata.maturin]
