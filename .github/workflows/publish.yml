@@ -66,6 +66,32 @@ jobs:
         name: wheels
         path: target/wheels
 
+  linux-musl:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target:
+        - x86_64-unknown-linux-musl
+        python-version:
+        - 3.7
+        - 3.8
+        - 3.9
+        - '3.10'
+
+    container:
+      image: cr.amira.io/gi0baro/maturin-builds/musl/${{ matrix.python-version }}:latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: |
+        maturin build --release --strip --no-sdist --compatibility musllinux_1_1 --target ${{ matrix.target }}
+    - name: Upload wheels
+      uses: actions/upload-artifact@v2
+      with:
+        name: wheels
+        path: target/wheels
+
   macos:
     runs-on: macos-latest
     strategy:
@@ -121,7 +147,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: [ sdist, linux-gnu, macos, windows ]
+    needs: [ sdist, linux-gnu, linux-musl, macos, windows ]
     steps:
       - uses: actions/download-artifact@v2
         with:
@@ -134,5 +160,5 @@ jobs:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         run: |
-          pip install --upgrade twine
+          pip install --upgrade pip twine
           twine upload --skip-existing *
