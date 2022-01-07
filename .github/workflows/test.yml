@@ -9,7 +9,7 @@ on:
   pull_request:
 
 env:
-  MATURIN_VERSION: 0.11.5
+  MATURIN_VERSION: 0.12.6
 
 jobs:
   linux:

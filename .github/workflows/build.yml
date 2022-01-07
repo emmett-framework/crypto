@@ -3,7 +3,7 @@ name: build
 on: workflow_dispatch
 
 env:
-  MATURIN_VERSION: 0.11.5
+  MATURIN_VERSION: 0.12.6
 
 jobs:
   sdist:
@@ -44,9 +44,7 @@ jobs:
             lib: cp310-cp310
         target:
           - arch: x86_64
-            # container: quay.io/pypa/manylinux2010_x86_64:latest
           - arch: aarch64
-            # container: cr.amira.io/gi0baro/manylinux-cross/manylinux2014:aarch64
 
     steps:
     - uses: actions/checkout@v2
@@ -60,7 +58,6 @@ jobs:
         args: --release --strip --no-sdist --interpreter python${{ matrix.python-config.version }}
         target: ${{ matrix.target.arch }}
         manylinux: auto
-        # container: ${{ matrix.target.container }}
     - name: Upload wheels
       uses: actions/upload-artifact@v2
       with:
@@ -80,21 +77,10 @@ jobs:
         - '3.10'
 
     container:
-      # image: python:${{ matrix.python-version }}-alpine
-      image: cr.amira.io/gi0baro/maturin-builds/musl/${{ matrix.python-version }}:38acee49
+      image: cr.amira.io/gi0baro/maturin-builds/musl/${{ matrix.python-version }}:bb6b26d2
 
     steps:
     - uses: actions/checkout@v2
-    # - name: deps
-    #   run: |
-    #     apk add --no-cache build-base curl
-    #     curl -sSL https://github.com/PyO3/maturin/releases/download/v${{ env.MATURIN_VERSION }}/maturin-${{ matrix.target }}.tar.gz | tar xz && mv maturin /usr/bin
-    # - uses: actions-rs/toolchain@v1
-    #   with:
-    #     toolchain: stable
-    #     target: ${{ matrix.target }}
-    #     profile: minimal
-    #     default: true
     - name: Build
       run: |
         maturin build --release --strip --no-sdist --compatibility musllinux_1_1 --target ${{ matrix.target }}
