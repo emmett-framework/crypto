@@ -1,22 +1,22 @@
 from enum import Enum
 
-from . import _ciphers
+from . import _crypto
 
 AES_BLOCK_SIZE = 128 // 8
 
 
 class AESModes(Enum):
     CFB8 = {
-        128 // 8: (_ciphers.aes128_cfb8_encrypt, _ciphers.aes128_cfb8_decrypt),
-        256 // 8: (_ciphers.aes256_cfb8_encrypt, _ciphers.aes256_cfb8_decrypt)
+        128 // 8: (_crypto.aes128_cfb8_encrypt, _crypto.aes128_cfb8_decrypt),
+        256 // 8: (_crypto.aes256_cfb8_encrypt, _crypto.aes256_cfb8_decrypt)
     }
     CFB128 = {
-        128 // 8: (_ciphers.aes128_cfb128_encrypt, _ciphers.aes128_cfb128_decrypt),
-        256 // 8: (_ciphers.aes256_cfb128_encrypt, _ciphers.aes256_cfb128_decrypt)
+        128 // 8: (_crypto.aes128_cfb128_encrypt, _crypto.aes128_cfb128_decrypt),
+        256 // 8: (_crypto.aes256_cfb128_encrypt, _crypto.aes256_cfb128_decrypt)
     }
     CTR128 = {
-        128 // 8: (_ciphers.aes128_ctr128, _ciphers.aes128_ctr128),
-        256 // 8: (_ciphers.aes256_ctr128, _ciphers.aes256_ctr128)
+        128 // 8: (_crypto.aes128_ctr128, _crypto.aes128_ctr128),
+        256 // 8: (_crypto.aes256_ctr128, _crypto.aes256_ctr128)
     }
 
 

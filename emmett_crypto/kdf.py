@@ -2,14 +2,14 @@ import codecs
 
 from enum import Enum
 
-from . import _kdf
+from . import _crypto
 
 
 class PBKDF2_HMAC(Enum):
-    sha1 = _kdf.pbkdf2_sha1
-    sha256 = _kdf.pbkdf2_sha256
-    sha384 = _kdf.pbkdf2_sha384
-    sha512 = _kdf.pbkdf2_sha512
+    sha1 = _crypto.pbkdf2_sha1
+    sha256 = _crypto.pbkdf2_sha256
+    sha384 = _crypto.pbkdf2_sha384
+    sha512 = _crypto.pbkdf2_sha512
 
 
 def pbkdf2_bin(

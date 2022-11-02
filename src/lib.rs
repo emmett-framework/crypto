@@ -1,3 +1,7 @@
+#[cfg(not(all(target_os="linux", target_arch="aarch64")))]
+#[global_allocator]
+static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
 use pyo3::prelude::*;
 
 mod ciphers;
@@ -5,9 +9,9 @@ mod kdf;
 
 
 #[pymodule]
-fn emmett_crypto(py: Python, module: &PyModule) -> PyResult<()> {
-    module.add_submodule(ciphers::build_pymodule(py)?)?;
-    module.add_submodule(kdf::build_pymodule(py)?)?;
+fn _crypto(_py: Python, module: &PyModule) -> PyResult<()> {
+    ciphers::init_pymodule(module)?;
+    kdf::init_pymodule(module)?;
 
     Ok(())
 }

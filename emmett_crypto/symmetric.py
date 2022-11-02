@@ -5,14 +5,14 @@ from base64 import urlsafe_b64decode, urlsafe_b64encode
 from binascii import hexlify, unhexlify
 from typing import Tuple, Union
 
-from . import _ciphers, _kdf
+from . import _crypto
 
 
 def encrypt(data: Union[bytes, str], key: str) -> Tuple[bytes, bytes, bytes]:
     if isinstance(data, str):
         data = data.encode("utf8")
     klen, ivlen, salt = 256 // 8, 128 // 8, os.urandom(32)
-    dkey = _kdf.pbkdf2_sha256(
+    dkey = _crypto.pbkdf2_sha256(
         key.encode("utf8"),
         salt,
         1000,
@@ -21,14 +21,14 @@ def encrypt(data: Union[bytes, str], key: str) -> Tuple[bytes, bytes, bytes]:
     k1 = dkey[:klen]
     k2 = dkey[klen:(klen * 2)]
     nonce = dkey[(klen * 2):(klen * 2) + ivlen]
-    cipher = _ciphers.aes256_ctr128(data, k1, nonce)
+    cipher = _crypto.aes256_ctr128(data, k1, nonce)
     signature = hmac.digest(k2, cipher, "sha256")
     return cipher, salt, signature
 
 
 def decrypt(data: bytes, salt: bytes, signature: bytes, key: str) -> bytes:
     klen, ivlen = 256 // 8, 128 // 8
-    dkey = _kdf.pbkdf2_sha256(
+    dkey = _crypto.pbkdf2_sha256(
         key.encode("utf8"),
         salt,
         1000,
@@ -39,7 +39,7 @@ def decrypt(data: bytes, salt: bytes, signature: bytes, key: str) -> bytes:
     nonce = dkey[(klen * 2):(klen * 2) + ivlen]
     if not hmac.compare_digest(signature, hmac.digest(k2, data, "sha256")):
         raise ValueError("Signature verification failed")
-    return _ciphers.aes256_ctr128(data, k1, nonce)
+    return _crypto.aes256_ctr128(data, k1, nonce)
 
 
 def encrypt_hex(data: Union[bytes, str], key: str, jchar: str = ":") -> str:
