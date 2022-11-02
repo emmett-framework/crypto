@@ -1,6 +1,6 @@
 [package]
 name = "emmett-crypto"
-version = "0.2.2"
+version = "0.3.0"
 description = "Emmett framework cryptographic library"
 authors = ["Giovanni Barillari <gi0baro@d4net.org>"]
 license = "BSD-3-Clause"
@@ -21,18 +21,11 @@ include = [
 ]
 
 [lib]
-name = "emmett_crypto"
+name = "_crypto"
 crate-type = ["cdylib"]
 
-[dependencies]
-aes = { version = "0.7" }
-cfb8 = { version = "0.7" }
-cfb-mode = { version = "0.7" }
-ctr = { version = "0.8" }
-pyo3 = { version = "0.15", features = ["extension-module"] }
-ring = { version = "0.16" }
-
 [package.metadata.maturin]
+name = "emmett_crypto._crypto"
 requires-python = ">=3.7"
 
 classifiers = [
@@ -47,8 +40,28 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python",
     "Programming Language :: Rust",
     "Topic :: Security :: Cryptography"
 ]
+
+[dependencies]
+aes = { version = "0.8" }
+cfb8 = { version = "0.8" }
+cfb-mode = { version = "0.8" }
+ctr = { version = "0.9" }
+pyo3 = { version = "0.17", features = ["extension-module"] }
+ring = { version = "0.16" }
+
+[target.'cfg(not(all(target_os="linux", target_arch="aarch64")))'.dependencies]
+mimalloc = "=0.1.30"
+
+[profile.release]
+codegen-units = 1
+debug = false
+incremental = false
+lto = "thin"
+opt-level = 3
+panic = "abort"

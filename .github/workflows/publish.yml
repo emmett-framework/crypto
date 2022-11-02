@@ -5,7 +5,7 @@ on:
     types: [published]
 
 env:
-  MATURIN_VERSION: 0.12.6
+  MATURIN_VERSION: 0.13.7
 
 jobs:
   sdist:
@@ -16,12 +16,12 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.9
+        python-version: '3.10'
     - uses: messense/maturin-action@v1
       with:
         maturin-version: v${{ env.MATURIN_VERSION }}
         command: build
-        args: --release --strip --interpreter python${{ matrix.python-config.version }}
+        args: --release --strip --sdist --interpreter python${{ matrix.python-config.version }}
         target: x64
         manylinux: off
         container: off
@@ -44,6 +44,8 @@ jobs:
             lib: cp39-cp39
           - version: '3.10'
             lib: cp310-cp310
+          - version: '3.11'
+            lib: cp311-cp311
         target:
           - arch: x86_64
           - arch: aarch64
@@ -57,7 +59,7 @@ jobs:
       with:
         maturin-version: v${{ env.MATURIN_VERSION }}
         command: build
-        args: --release --strip --no-sdist --interpreter python${{ matrix.python-config.version }}
+        args: --release --strip --interpreter python${{ matrix.python-config.version }}
         target: ${{ matrix.target.arch }}
         manylinux: auto
     - name: Upload wheels
@@ -77,6 +79,7 @@ jobs:
         - 3.8
         - 3.9
         - '3.10'
+        - '3.11'
 
     container:
       image: cr.amira.io/gi0baro/maturin-builds/musl/${{ matrix.python-version }}:latest
@@ -85,7 +88,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build
       run: |
-        maturin build --release --strip --no-sdist --compatibility musllinux_1_1 --target ${{ matrix.target }}
+        maturin build --release --strip --compatibility musllinux_1_1 --target ${{ matrix.target }}
     - name: Upload wheels
       uses: actions/upload-artifact@v2
       with:
@@ -96,7 +99,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9, '3.10']
+        python-version: [3.7, 3.8, 3.9, '3.10', '3.11']
 
     steps:
     - uses: actions/checkout@v2
@@ -108,13 +111,13 @@ jobs:
       with:
         maturin-version: v${{ env.MATURIN_VERSION }}
         command: build
-        args: --release --strip --no-sdist --interpreter python${{ matrix.python-version }}
+        args: --release --strip --interpreter python${{ matrix.python-version }}
         target: x86_64
     - uses: messense/maturin-action@v1
       with:
         maturin-version: v${{ env.MATURIN_VERSION }}
         command: build
-        args: --release --strip --universal2 --no-sdist --interpreter python${{ matrix.python-version }}
+        args: --release --strip --universal2 --interpreter python${{ matrix.python-version }}
     - name: Upload wheels
       uses: actions/upload-artifact@v2
       with:
@@ -125,7 +128,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9, '3.10']
+        python-version: [3.7, 3.8, 3.9, '3.10', '3.11']
 
     steps:
     - uses: actions/checkout@v2
@@ -137,7 +140,7 @@ jobs:
       with:
         maturin-version: v${{ env.MATURIN_VERSION }}
         command: build
-        args: --release --strip --no-sdist
+        args: --release --strip
         target: x86_64
     - name: Upload wheels
       uses: actions/upload-artifact@v2
@@ -154,7 +157,7 @@ jobs:
           name: wheels
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: '3.10'
       - name: Publish to PyPi
         env:
           TWINE_USERNAME: __token__
