@@ -1,6 +1,13 @@
 Emmett-Crypto changelog
 =======================
 
+Version 0.3
+-----------
+
+*Released on November 2nd 2022*
+
+- Added Python 3.11 support
+
 Version 0.2
 -----------
 
