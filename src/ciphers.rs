@@ -33,61 +33,71 @@ fn aes_stream<C: StreamCipher>(py: Python, cipher: &mut C, data: &[u8]) -> Py<Py
     PyBytes::new(py, &wdata).into()
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, key, nonce))]
 fn aes128_cfb8_encrypt(py: Python, data: &[u8], key: &[u8], nonce: &[u8]) -> PyResult<Py<PyBytes>> {
     let cipher = Aes128Cfb8Encryptor::new(key.into(), nonce.into());
     Ok(aes_asyncstream_encrypt(py, cipher, data))
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, key, nonce))]
 fn aes128_cfb8_decrypt(py: Python, data: &[u8], key: &[u8], nonce: &[u8]) -> PyResult<Py<PyBytes>> {
     let cipher = Aes128Cfb8Decryptor::new(key.into(), nonce.into());
     Ok(aes_asyncstream_decrypt(py, cipher, data))
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, key, nonce))]
 fn aes256_cfb8_encrypt(py: Python, data: &[u8], key: &[u8], nonce: &[u8]) -> PyResult<Py<PyBytes>> {
     let cipher = Aes256Cfb8Encryptor::new(key.into(), nonce.into());
     Ok(aes_asyncstream_encrypt(py, cipher, data))
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, key, nonce))]
 fn aes256_cfb8_decrypt(py: Python, data: &[u8], key: &[u8], nonce: &[u8]) -> PyResult<Py<PyBytes>> {
     let cipher = Aes256Cfb8Decryptor::new(key.into(), nonce.into());
     Ok(aes_asyncstream_decrypt(py, cipher, data))
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, key, nonce))]
 fn aes128_cfb128_encrypt(py: Python, data: &[u8], key: &[u8], nonce: &[u8]) -> PyResult<Py<PyBytes>> {
     let cipher = Aes128Cfb128Encryptor::new(key.into(), nonce.into());
     Ok(aes_asyncstream_encrypt(py, cipher, data))
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, key, nonce))]
 fn aes128_cfb128_decrypt(py: Python, data: &[u8], key: &[u8], nonce: &[u8]) -> PyResult<Py<PyBytes>> {
     let cipher = Aes128Cfb128Decryptor::new(key.into(), nonce.into());
     Ok(aes_asyncstream_decrypt(py, cipher, data))
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, key, nonce))]
 fn aes256_cfb128_encrypt(py: Python, data: &[u8], key: &[u8], nonce: &[u8]) -> PyResult<Py<PyBytes>> {
     let cipher = Aes256Cfb128Encryptor::new(key.into(), nonce.into());
     Ok(aes_asyncstream_encrypt(py, cipher, data))
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, key, nonce))]
 fn aes256_cfb128_decrypt(py: Python, data: &[u8], key: &[u8], nonce: &[u8]) -> PyResult<Py<PyBytes>> {
     let cipher = Aes256Cfb128Decryptor::new(key.into(), nonce.into());
     Ok(aes_asyncstream_decrypt(py, cipher, data))
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, key, nonce))]
 fn aes128_ctr128(py: Python, data: &[u8], key: &[u8], nonce: &[u8]) -> PyResult<Py<PyBytes>> {
     let mut cipher = Aes128Ctr128::new(key.into(), nonce.into());
     Ok(aes_stream(py, &mut cipher, data))
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, key, nonce))]
 fn aes256_ctr128(py: Python, data: &[u8], key: &[u8], nonce: &[u8]) -> PyResult<Py<PyBytes>> {
     let mut cipher = Aes256Ctr128::new(key.into(), nonce.into());
     Ok(aes_stream(py, &mut cipher, data))

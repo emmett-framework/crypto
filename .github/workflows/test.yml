@@ -9,14 +9,14 @@ on:
   pull_request:
 
 env:
-  MATURIN_VERSION: 0.13.7
+  MATURIN_VERSION: 1.2.3
 
 jobs:
   linux:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9, '3.10', '3.11']
+        python-version: [3.8, 3.9, '3.10', '3.11']
 
     steps:
     - uses: actions/checkout@v2
@@ -28,8 +28,8 @@ jobs:
       run: |
         python -m venv .venv
         source .venv/bin/activate
-        pip install maturin==${{ env.MATURIN_VERSION }} pytest
-        maturin develop --release
+        pip install maturin==${{ env.MATURIN_VERSION }}
+        maturin develop --extras test
     - name: Test
       run: |
         source .venv/bin/activate
@@ -39,7 +39,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9, '3.10', '3.11']
+        python-version: [3.8, 3.9, '3.10', '3.11']
 
     steps:
     - uses: actions/checkout@v2
@@ -51,8 +51,8 @@ jobs:
       run: |
         python -m venv .venv
         source .venv/bin/activate
-        pip install maturin==${{ env.MATURIN_VERSION }} pytest
-        maturin develop --release
+        pip install maturin==${{ env.MATURIN_VERSION }}
+        maturin develop --extras test
     - name: Test
       run: |
         source .venv/bin/activate
@@ -62,7 +62,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9, '3.10', '3.11']
+        python-version: [3.8, 3.9, '3.10', '3.11']
 
     steps:
     - uses: actions/checkout@v2
@@ -74,8 +74,8 @@ jobs:
       run: |
         python -m venv venv
         venv/Scripts/Activate.ps1
-        pip install maturin==${{ env.MATURIN_VERSION }} pytest
-        maturin develop --release
+        pip install maturin==${{ env.MATURIN_VERSION }}
+        maturin develop --extras test
     - name: Test
       run: |
         venv/Scripts/Activate.ps1

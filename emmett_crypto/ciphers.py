@@ -29,7 +29,7 @@ def aes_encrypt(
     try:
         method, _ = mode.value[len(key)]
     except KeyError:
-        raise ValueError(f"key must be 16 or 32 bytes long")
+        raise ValueError("key must be 16 or 32 bytes long")
     assert len(nonce) == AES_BLOCK_SIZE, f"nonce must be {AES_BLOCK_SIZE} bytes long"
     return method(
         data,
@@ -47,7 +47,7 @@ def aes_decrypt(
     try:
         _, method = mode.value[len(key)]
     except KeyError:
-        raise ValueError(f"key must be 16 or 32 bytes long")
+        raise ValueError("key must be 16 or 32 bytes long")
     assert len(nonce) == AES_BLOCK_SIZE, f"nonce must be {AES_BLOCK_SIZE} bytes long"
     return method(
         data,

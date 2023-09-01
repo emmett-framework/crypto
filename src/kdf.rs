@@ -13,22 +13,26 @@ fn pbkdf2(py: Python, data: &[u8], salt: &[u8], rounds: u32, klen: u32, hash_alg
     PyBytes::new(py, &wdata).into()
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, salt, rounds, klen))]
 fn pbkdf2_sha1(py: Python, data: &[u8], salt: &[u8], rounds: u32, klen: u32) -> PyResult<Py<PyBytes>> {
     Ok(pbkdf2(py, data, salt, rounds, klen, _pbkdf2::PBKDF2_HMAC_SHA1))
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, salt, rounds, klen))]
 fn pbkdf2_sha256(py: Python, data: &[u8], salt: &[u8], rounds: u32, klen: u32) -> PyResult<Py<PyBytes>> {
     Ok(pbkdf2(py, data, salt, rounds, klen, _pbkdf2::PBKDF2_HMAC_SHA256))
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, salt, rounds, klen))]
 fn pbkdf2_sha384(py: Python, data: &[u8], salt: &[u8], rounds: u32, klen: u32) -> PyResult<Py<PyBytes>> {
     Ok(pbkdf2(py, data, salt, rounds, klen, _pbkdf2::PBKDF2_HMAC_SHA384))
 }
 
-#[pyfunction(module="emmett_crypto._crypto")]
+#[pyfunction]
+#[pyo3(signature = (data, salt, rounds, klen))]
 fn pbkdf2_sha512(py: Python, data: &[u8], salt: &[u8], rounds: u32, klen: u32) -> PyResult<Py<PyBytes>> {
     Ok(pbkdf2(py, data, salt, rounds, klen, _pbkdf2::PBKDF2_HMAC_SHA512))
 }
