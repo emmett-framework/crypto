@@ -1,7 +1,7 @@
 use pyo3::prelude::*;
 use pyo3::types::PyBytes;
 
-use ctr::cipher::{AsyncStreamCipher, BlockEncryptMut, BlockDecryptMut, KeyIvInit, StreamCipher};
+use ctr::cipher::{AsyncStreamCipher, BlockDecryptMut, BlockEncryptMut, KeyIvInit, StreamCipher};
 
 type Aes128Cfb8Decryptor = cfb8::Decryptor<aes::Aes128>;
 type Aes128Cfb8Encryptor = cfb8::Encryptor<aes::Aes128>;
@@ -13,7 +13,6 @@ type Aes256Cfb128Decryptor = cfb_mode::Decryptor<aes::Aes256>;
 type Aes256Cfb128Encryptor = cfb_mode::Encryptor<aes::Aes256>;
 type Aes128Ctr128 = ctr::Ctr128BE<aes::Aes128>;
 type Aes256Ctr128 = ctr::Ctr128BE<aes::Aes256>;
-
 
 fn aes_asyncstream_encrypt<C: AsyncStreamCipher + BlockEncryptMut>(py: Python, cipher: C, data: &[u8]) -> Py<PyBytes> {
     let mut wdata: Vec<u8> = data.into();

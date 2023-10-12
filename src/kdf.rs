@@ -5,12 +5,11 @@ use pyo3::types::PyBytes;
 
 use ring::pbkdf2 as _pbkdf2;
 
-
 fn pbkdf2(py: Python, data: &[u8], salt: &[u8], rounds: u32, klen: u32, hash_algo: _pbkdf2::Algorithm) -> Py<PyBytes> {
     let mut vdata = vec![0u8; klen as usize];
-    let mut wdata: &mut[u8] = &mut vdata;
-    _pbkdf2::derive(hash_algo, NonZeroU32::new(rounds).unwrap(), &salt, &data, &mut wdata);
-    PyBytes::new(py, &wdata).into()
+    let wdata: &mut [u8] = &mut vdata;
+    _pbkdf2::derive(hash_algo, NonZeroU32::new(rounds).unwrap(), salt, data, wdata);
+    PyBytes::new(py, wdata).into()
 }
 
 #[pyfunction]
