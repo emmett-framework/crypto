@@ -1,6 +1,6 @@
 [package]
 name = "emmett-crypto"
-version = "0.4.0"
+version = "0.5.0"
 description = "Emmett framework cryptographic library"
 authors = ["Giovanni Barillari <g@baro.dev>"]
 license = "BSD-3-Clause"
@@ -35,11 +35,11 @@ aes = { version = "0.8" }
 cfb8 = { version = "0.8" }
 cfb-mode = { version = "0.8" }
 ctr = { version = "0.9" }
-pyo3 = { version = "=0.19", features = ["extension-module"] }
+pyo3 = { version = "=0.20", features = ["extension-module"] }
 ring = { version = "0.16" }
 
 [build-dependencies]
-pyo3-build-config = { version = "=0.19", features = ["resolve-config"] }
+pyo3-build-config = { version = "=0.20", features = ["resolve-config"] }
 
 [profile.release]
 codegen-units = 1
