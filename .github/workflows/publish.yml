@@ -80,7 +80,7 @@ jobs:
   wheel-win:
     runs-on: windows-latest
     env:
-      PY_ALL: 3.8 3.9 3.10 3.11 3.12 C:\hostedtoolcache\windows\PyPy\3.9.18\x86\python3.exe C:\hostedtoolcache\windows\PyPy\3.10.13\x86\python3.exe
+      PY_ALL: 3.8 3.9 3.10 3.11 pypy3.8 pypy3.9 pypy3.10
     steps:
       - uses: actions/checkout@v3
       - uses: pyo3/maturin-action@v1
