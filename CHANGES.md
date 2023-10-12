@@ -1,6 +1,14 @@
 Emmett-Crypto changelog
 =======================
 
+Version 0.5
+-----------
+
+*Released on October 12th 2023*
+
+- Add Python 3.12 support
+- Bump PyO3 to 0.20
+
 Version 0.4
 -----------
 
@@ -15,14 +23,14 @@ Version 0.3
 
 *Released on November 2nd 2022*
 
-- Added Python 3.11 support
+- Add Python 3.11 support
 
 Version 0.2
 -----------
 
 *Released on October 12th 2021*
 
-- Added Python 3.10 support
+- Add Python 3.10 support
 
 Version 0.1
 -----------
