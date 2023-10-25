@@ -1,6 +1,6 @@
 [package]
 name = "emmett-crypto"
-version = "0.5.0"
+version = "0.5.1"
 description = "Emmett framework cryptographic library"
 authors = ["Giovanni Barillari <g@baro.dev>"]
 license = "BSD-3-Clause"
@@ -15,7 +15,6 @@ repository = "https://github.com/emmett-framework/crypto"
 include = [
     "/Cargo.toml",
     "/pyproject.toml",
-    "/build.rs",
     "/LICENSE",
     "/README.md",
     "/src",
@@ -37,9 +36,6 @@ cfb-mode = { version = "0.8" }
 ctr = { version = "0.9" }
 pyo3 = { version = "=0.20", features = ["extension-module", "generate-import-lib"] }
 ring = { version = "0.16" }
-
-[build-dependencies]
-pyo3-build-config = { version = "=0.20", features = ["resolve-config"] }
 
 [profile.release]
 codegen-units = 1

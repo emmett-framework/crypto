@@ -104,14 +104,13 @@ dependencies = [
 
 [[package]]
 name = "emmett-crypto"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "aes",
  "cfb-mode",
  "cfb8",
  "ctr",
  "pyo3",
- "pyo3-build-config",
  "ring",
 ]
 
