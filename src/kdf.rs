@@ -37,7 +37,7 @@ fn pbkdf2_sha512(py: Python, data: &[u8], salt: &[u8], rounds: u32, klen: u32) -
     Ok(pbkdf2(py, data, salt, rounds, klen, _pbkdf2::PBKDF2_HMAC_SHA512))
 }
 
-pub(crate) fn init_pymodule(module: &PyModule) -> PyResult<()> {
+pub(crate) fn init_pymodule(module: &Bound<PyModule>) -> PyResult<()> {
     module.add_function(wrap_pyfunction!(pbkdf2_sha1, module)?)?;
     module.add_function(wrap_pyfunction!(pbkdf2_sha256, module)?)?;
     module.add_function(wrap_pyfunction!(pbkdf2_sha384, module)?)?;

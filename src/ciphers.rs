@@ -21,8 +21,8 @@ fn aes_asyncstream_encrypt<C: AsyncStreamCipher + BlockEncryptMut + Send>(
 ) -> PyObject {
     let mut vec = data.to_vec();
     let ret = py.allow_threads(|| {
-        let mut ret = &mut vec[..];
-        cipher.encrypt(&mut ret);
+        let ret = &mut vec[..];
+        cipher.encrypt(ret);
         ret
     });
     ret.into_py(py)
@@ -36,8 +36,8 @@ fn aes_asyncstream_decrypt<C: AsyncStreamCipher + BlockDecryptMut + Send>(
 ) -> PyObject {
     let mut vec = data.to_vec();
     let ret = py.allow_threads(|| {
-        let mut ret = &mut vec[..];
-        cipher.decrypt(&mut ret);
+        let ret = &mut vec[..];
+        cipher.decrypt(ret);
         ret
     });
     ret.into_py(py)
@@ -47,8 +47,8 @@ fn aes_asyncstream_decrypt<C: AsyncStreamCipher + BlockDecryptMut + Send>(
 fn aes_stream<C: StreamCipher + Send>(py: Python, cipher: &mut C, data: Cow<[u8]>) -> PyObject {
     let mut vec = data.to_vec();
     let ret = py.allow_threads(|| {
-        let mut ret = &mut vec[..];
-        cipher.apply_keystream(&mut ret);
+        let ret = &mut vec[..];
+        cipher.apply_keystream(ret);
         ret
     });
     ret.into_py(py)
@@ -124,7 +124,7 @@ fn aes256_ctr128(py: Python, data: Cow<[u8]>, key: &[u8], nonce: &[u8]) -> PyRes
     Ok(aes_stream(py, &mut cipher, data))
 }
 
-pub(crate) fn init_pymodule(module: &PyModule) -> PyResult<()> {
+pub(crate) fn init_pymodule(module: &Bound<PyModule>) -> PyResult<()> {
     module.add_function(wrap_pyfunction!(aes128_cfb8_decrypt, module)?)?;
     module.add_function(wrap_pyfunction!(aes128_cfb8_encrypt, module)?)?;
     module.add_function(wrap_pyfunction!(aes256_cfb8_decrypt, module)?)?;

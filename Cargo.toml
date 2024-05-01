@@ -34,7 +34,7 @@ aes = { version = "0.8" }
 cfb8 = { version = "0.8" }
 cfb-mode = { version = "0.8" }
 ctr = { version = "0.9" }
-pyo3 = { version = "=0.20", features = ["extension-module", "generate-import-lib"] }
+pyo3 = { version = "=0.21", features = ["extension-module", "generate-import-lib"] }
 ring = { version = "0.16" }
 
 [profile.release]
@@ -44,3 +44,4 @@ incremental = false
 lto = "fat"
 opt-level = 3
 panic = "abort"
+strip = true
