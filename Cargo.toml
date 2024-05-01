@@ -1,6 +1,6 @@
 [package]
 name = "emmett-crypto"
-version = "0.5.1"
+version = "0.6.0"
 description = "Emmett framework cryptographic library"
 authors = ["Giovanni Barillari <g@baro.dev>"]
 license = "BSD-3-Clause"
